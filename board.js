@@ -29,7 +29,7 @@ function Board() {
   }
 
   this.checkEdges = function() {
-    if (this.pos.x <= 0) this.pos.x = 0;
-    else if (this.pos.x + this.r >= width) this.pos.x = width - this.r;
+    if (this.pos.x <= 0) this.pos.x = width - this.r;
+    else if (this.pos.x + this.r >= width) this.pos.x = 0;
   }
 }
