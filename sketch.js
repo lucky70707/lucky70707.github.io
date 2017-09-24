@@ -1,4 +1,4 @@
-var backgroundValue = 0;
+
 var blokje;
 
 function setup() {
@@ -9,21 +9,20 @@ function setup() {
 
 function draw() {
   background(255);
-  paddle.display();
 
+  blokje.display();
+  blokje.move(0);
 }
 
 
 function keyPressed() {
   if (key === 'a' || key === 'A') {
-    if(backgroundValue > 0){
-      backgroundValue--;
-    }
+
+      blokje.move(20);
+
 
   } else if (key === 'd' || key === 'D') {
-    if (backgroundValue < 256) {
-      backgroundValue++;
-    }
+
   }
   }
 }
