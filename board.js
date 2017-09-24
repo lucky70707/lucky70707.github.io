@@ -18,9 +18,9 @@ function Board() {
 
   this.update = function() {
     if (this.isMovingLeft) {
-      this.move(-20);
+      this.move(-15);
     } else if (this.isMovingRight) {
-      this.move(20);
+      this.move(15);
     }
   }
 
