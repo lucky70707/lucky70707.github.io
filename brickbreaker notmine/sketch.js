@@ -83,16 +83,18 @@ function draw() {
   }
 }
 
-function keyReleased() {
+/*function keyReleased() {
   board.isMovingRight = false;
   board.isMovingLeft = false;
-}
+}*/
 
 function keyPressed() {
   if (key === 'a' || key === 'A') {
     board.isMovingLeft = true;
+    board.isMovingRight = false;
   } else if (key === 'd' || key === 'D') {
     board.isMovingRight = true;
+    board.isMovingLeft = false;
   } else if (key === 's' || key === 'S') {
     if (bricks.length === 0) createBricks(20);
     gameOver = false;
