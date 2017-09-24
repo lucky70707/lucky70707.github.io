@@ -1,5 +1,5 @@
 function Board() {
-  this.r = 160;
+  this.r = 320;
   this.h = 20;
   this.pos = createVector(width / 2 - this.r / 2, height - 40);
   this.isMovingLeft = false;
@@ -7,7 +7,7 @@ function Board() {
 
   this.display = function() {
     strokeWeight(2);
-    stroke('#9A8DF2');
+    stroke('#000000');
     rect(this.pos.x, this.pos.y, this.r, this.h);
     for (var i = 0; i < this.r; i += this.h) {
       line(this.pos.x + i, this.pos.y, this.pos.x + this.h + i, this.pos.y + this.h);
