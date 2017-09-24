@@ -12,7 +12,7 @@ function setup() {
 }
 
 function draw() {
-  background(backgroundValue);
+  background(255);
 
 }
 /*
