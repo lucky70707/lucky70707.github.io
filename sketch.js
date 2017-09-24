@@ -1,25 +1,18 @@
 var backgroundValue = 0;
-
+var blokje;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  ellipseMode(CENTER);
-  textAlign(CENTER);
-  noFill();
-  stroke(0);
+  blokje = new Blokje();
 
-  createText();
 }
 
 function draw() {
-  background(0);
+  background(255);
+  paddle.display();
 
 }
-/*
-function keyReleased() {
-  board.isMovingRight = false;
-  board.isMovingLeft = false;
-}*/
+
 
 function keyPressed() {
   if (key === 'a' || key === 'A') {
@@ -33,10 +26,4 @@ function keyPressed() {
     }
   }
   }
-}
-
-
-
-function createText() {
-
 }
