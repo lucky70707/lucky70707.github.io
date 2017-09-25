@@ -1,6 +1,9 @@
 function BackgroundAnimation(){
-  this.cValue = 170;
-  this.cUp = false;
+  this.rValue = 170;
+  this.gValue = 200;
+  this.bValue = 100;
+
+  /*this.cUp = false;
   this.cDown = false;
 
 
@@ -17,7 +20,7 @@ function BackgroundAnimation(){
       change(-15);
     }
 
-  }
+  }*/
 
 
 }

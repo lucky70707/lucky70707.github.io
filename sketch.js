@@ -1,35 +1,41 @@
-var backgroundValue = 0;
-var blokje;
-var bgA;
+var backgroundValue = 200;
+var paddle;
+//var bgA;
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  blokje = new Blokje();
-  bgA = new BackgroundAnimation();
+  paddle = new Paddle();
+  //bgA = new BackgroundAnimation();
 }
 
 function draw() {
-  background(bgA.cValue);
+  background(255);
 
-  blokje.display();
-  blokje.move(1);
-  bgA.update();
+  paddle.display();
+  paddle.update();
+  //paddle.move(1);
+//  bgA.update();
 }
 function keyReleased(){
-  bgA.cDown = false;
-  bgA.cUp = false;
+  paddle.isMovingLeft = false;
+  paddle.isMovingRight = false;
+
 }
 
 function keyPressed() {
   if (key === 'a' || key === 'A') {
-    if(backgroundValue > 0){
-      bgA.cDown = true;
+   paddle.isMovingRight = true;
+  //  if(backgroundValue > 0){
+  //    backgroundValue-=15;
+
+      //bgA.cDown = true;
     }
 
-  } else if (key === 'd' || key === 'D') {
-    if (backgroundValue < 256) {
-      bgA.cUp = true;
+ else if (key === 'd' || key === 'D') {
+    paddle.isMovingLeft = true;
+  //  if (backgroundValue < 256) {
+    //  backgroundValue+=15;
+    //  bgA.cUp = true;
     }
-  }
   }
