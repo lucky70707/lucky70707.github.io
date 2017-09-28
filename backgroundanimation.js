@@ -1,26 +1,28 @@
 function BackgroundAnimation(){
-  this.rValue = 170;
-  this.gValue = 200;
-  this.bValue = 100;
+  this.rValue = 151
+  this.gValue = 0;
+  this.bValue = 0;
 
-  /*this.cUp = false;
-  this.cDown = false;
+  this.rUp = false;
+  this.rDown = false;
 
 
 
-  this.change = function (step) {
-    this.pos.x += step;
+  this.rChange = function (amount) {
+   if(this.rValue + amount > 0 && this.rValue + amount < 256){
+     this.rValue += amount;
+   }
   }
 
-  this.update = function(){
-    if(cUp==true){
-      change(15);
-    }
-    if(cDown==true){
-      change(-15);
+ this.rUpdate = function(){
+    if(rUp){
+      rChange(1);
+    } else
+    if(rDown==true){
+      rChange(-1);
     }
 
-  }*/
+  }
 
 
 }

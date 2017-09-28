@@ -23,6 +23,9 @@ function Paddle() {
     }
   }
 
-  
+  this.checkEdges = function() {
+    if(this.pos.x < 0) this.pos.x = 0;
+    else if (this.pos.x > width - this.w) this.pos.x =  width - this.w;
+  }
 
 }
