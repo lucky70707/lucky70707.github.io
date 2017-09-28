@@ -47,10 +47,7 @@ function draw() {
 
   //bgA.rUpdate();
 }
-function keyReleased(){
-  paddle.dir = 0;
-  bgA.rUp = false;
-}
+
 
 function keyPressed() {
   if (key === 'a' || key === 'A') {
