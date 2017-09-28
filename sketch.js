@@ -5,6 +5,8 @@ var ball;
 var bricks = [];
 var playingGame = false;
 var youWin =false;
+var aPressed = false;
+var dPressed = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -47,17 +49,32 @@ function draw() {
 
   //bgA.rUpdate();
 }
+function keyReleased(){
+  if (key === 'a' || key === 'A') {
+    this.aPressed =false;//maybe not this. ?
 
+  }
 
+  else if (key === 'd' || key === 'D') {
+
+    this.dPressed =false;
+}
+
+  if(aPressed === false && dPressed == false){
+    paddle.dir = 0;
+  }
+}
 function keyPressed() {
   if (key === 'a' || key === 'A') {
     paddle.dir=-1;
     bgA.rChange(50);
+    this.aPressed =true;//maybe not this. ?
     bgA.rUp = true;
   }
 
   else if (key === 'd' || key === 'D') {
     paddle.dir=1;
+    this.dPressed =true;
     bgA.rChange(-50);
     //  if (backgroundValue < 256) {
     //  backgroundValue+=15;
@@ -69,4 +86,5 @@ function keyPressed() {
       bricks.push(new Brick());
     }
   }
+
 }
