@@ -2,6 +2,9 @@ function Paddle() {
   this.w = 160;
   this.h = 20;
 
+  this.dir = 0;
+  this.vel = 20;
+
   this.isMovingLeft = false;
   this.isMovingRight = false;
 
@@ -11,17 +14,14 @@ function Paddle() {
     rect(this.pos.x, this.pos.y, this.w, this.h);
   }
 
-  this.move = function(step) {
+/*  this.move = function(step) {
     this.pos.x += step;
-  }
+  }*/
 
   this.update = function(){
-    if(this.isMovingRight){
-      this.move(20);
-    }else if (this.isMovingLeft){
-      this.move(-20);
+    this.pos.x += this.vel * this.dir;
     }
-  }
+
 
   this.checkEdges = function() {
     if(this.pos.x < 0) this.pos.x = 0;
