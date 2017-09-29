@@ -7,6 +7,7 @@ var playingGame = false;
 var youWin =false;
 var aPressed = false;
 var dPressed = false;
+var winText;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -17,17 +18,30 @@ function setup() {
   for(let i = 0; i <20; i++){
     bricks.push(new Brick());
   }
+  createText();
 }
 
 function draw() {
   background(bgA.rValue, bgA.gValue, bgA.bValue);
 
   paddle.display();
-  paddle.update();
-  paddle.checkEdges();
   ball.display();
-  ball.update();
-  ball.checkEdges();
+
+  if(playingGame){
+    paddle.update();
+    paddle.checkEdges();
+    ball.update();
+    ball.checkEdges();
+
+  }
+
+if(youWin){
+  winText.style('display','block');
+}else {
+  winText.style('display','none');
+}
+
+
   if(ball.meets(paddle) && ball.direction.y > 0 ){
     ball.direction.y *= -1;
   }
@@ -46,7 +60,14 @@ function draw() {
 
 
   }
-
+  if(ball.pos.y > height){
+    playingGame = false;
+    ball.pos = createVector(width /2 , height /2);
+  }
+  if(bricks.length ===0){
+    youWin = true;
+    playingGame = false;
+  }
   //bgA.rUpdate();
 }
 function keyReleased(){
@@ -79,12 +100,20 @@ function keyPressed() {
     //  if (backgroundValue < 256) {
     //  backgroundValue+=15;
     //  bgA.cUp = true;
-  }else if(key == 's'){
+  }else if(key === 's'|| key==='S'){
     playingGame = true;
     youWin = false;
     if(bricks.length === 0){
-      bricks.push(new Brick());
+      for(let i = 0; i<20; i++){
+        bricks.push(new Brick());
+      }
+
     }
   }
 
+}
+
+function createText(){
+  winText = createP('You Win!')
+  winText.position(width / 2 -50, 80);
 }
