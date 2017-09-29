@@ -14,6 +14,13 @@ function BackgroundAnimation(){
    }
   }
 
+  this.gChange = function (amount) {
+   if(this.gValue + amount > 0 && this.gValue + amount < 256){
+     this.gValue += amount;
+   }
+  }
+
+
  this.rUpdate = function(){
     if(rUp){
       rChange(1);
@@ -23,6 +30,8 @@ function BackgroundAnimation(){
     }
 
   }
+
+
 
 
 }

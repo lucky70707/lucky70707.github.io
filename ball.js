@@ -6,6 +6,7 @@ function Ball() {
 
   this.display = function() {
     ellipse(this.pos.x, this.pos.y, this.r*2 , this.r*2);
+
   }
 
   this.update = function(){
@@ -36,6 +37,7 @@ function Ball() {
         this.pos.y > paddle.pos.y -this.r &&
         this.pos.x > paddle.pos.x - this.r &&
         this.pos.x < paddle.pos.x + paddle.w+ this.r){
+
          return true;
        }else {
          return false;
