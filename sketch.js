@@ -46,6 +46,7 @@ function draw() {
 
 if(youWin){
   winText.style('display','block');
+  ball.direction.x = 1;
 
 }else {
   winText.style('display','none');
@@ -54,7 +55,7 @@ if(youWin){
 
   if(ball.meets(paddle) && ball.direction.y > 0 ){
       if(paddle.dir === 1){//paddle goes to the right
-        if(ball.direction> 0){
+        if(ball.direction.x> 0){
             ball.direction.x =1.5;
         }else {
           ball.direction.x +=0.5;
@@ -92,6 +93,7 @@ if(youWin){
     playingGame = false;
     ball.direction.x =1;
     ball.pos = createVector(width /2 , height /2);
+    paddle.pos = createVector(width /2 , height - 40);
   }
   if(bricks.length ===0){
     youWin = true;
@@ -136,7 +138,8 @@ function keyPressed() {
       for(let i = 0; i<20; i++){
         bricks.push(new Brick());
       }
-
+      ball.pos = createVector(width /2 , height /2);
+      paddle.pos = createVector(width /2 , height - 40);
     }
   }
 
