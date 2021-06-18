@@ -3,7 +3,7 @@ function Paddle() {
   this.h = 20;
 
   this.dir = 0;
-  this.vel = 5;
+  this.vel = 15;
 
   this.isMovingLeft = false;
   this.isMovingRight = false;
