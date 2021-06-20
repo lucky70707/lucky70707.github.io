@@ -58,10 +58,10 @@ function Cell(i,j,cols,rows){
     if(this.visited){
       if(i===0&&j===0){
         //background(255);
-        noStroke     ()   
+        noStroke     ()
         fill(6,214,160,100);
         rect(x,y,w,w);
-      }else if(i===cols&&j===rows){
+      }else if(i===cols-1&&j===rows-1){
         noStroke();
         fill(6,214,160,100);
         rect(x,y,w,w);
