@@ -43,7 +43,7 @@ function Cell(i,j,cols,rows){
     let y= this.j*w;
     //this.walls=[true,true,true,true]
 
-    stroke(255);
+    stroke(colorWalls);
 
     if(this.walls[0]){
       line(x    ,y    ,x+w  ,y);}
@@ -56,19 +56,22 @@ function Cell(i,j,cols,rows){
     line(x    ,y+w  ,x    ,y);}
 
     if(this.visited){
+      //start
       if(i===0&&j===0){
-        //background(255);
+
         noStroke     ()
-        fill(6,214,160,100);
+        fill(color(colorStart));
         rect(x,y,w,w);
+        //finish
       }else if(i===cols-1&&j===rows-1){
         noStroke();
-        fill(6,214,160,100);
+        fill(color(colorFinish));
         rect(x,y,w,w);
+        //maze
       }else{
       //  background(51);
         noStroke();
-        fill(255,0,255,100);
+        fill(color(colorMaze));
         rect(x,y,w,w);
       }
 
@@ -78,12 +81,5 @@ function Cell(i,j,cols,rows){
 
   }
 
-  this.showAsStart = function(){
-    let x=this.i*w;
-    let y= this.j*w;
 
-    stroke(165);
-    fill(100,255,255,100);
-    rect(x,y,w,w);
-  }
 }

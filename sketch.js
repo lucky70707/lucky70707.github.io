@@ -1,5 +1,5 @@
 let cols, rows;
-let w =80;
+let w =160;
 let grid= [];
 
 let current;
@@ -14,7 +14,17 @@ let downInt=2;
 let leftInt=3;
 
 let winText;
+let wincount=0;
 
+//color values
+let colorPlayer = 255;
+let colorPlayerStroke =0;
+let colorStart = '#F6DFEB'; //'#A0937D';
+let colorFinish ='#F8EDED'; //'#3A6351';
+let colorMaze = '#CAF7E3';  //'#5F939A';
+let colorWalls = 0;
+let colorBackground=51;
+let colorBackgroundOnWin=0;
 
 
 function  setup(){
@@ -37,7 +47,7 @@ function  setup(){
 
 function draw(){
 
-  background(51);
+  background(colorBackground);
 for (let i = 0; i < grid.length; i++) {
   grid[i].show();
 }
@@ -58,10 +68,7 @@ if (next) {
     current=stack.pop();
 
 }else{
-  //console.log("drawPlayer function called");
-
   while(done!==true){
-      console.log(grid);
       done=true;
 
   }
@@ -82,24 +89,24 @@ function Player(){
   let gridLocation=grid[0];
   this.drawPlayer = function(){
 
-    stroke(255);
-    fill(255,255,255,100);
+    stroke(colorPlayerStroke);
+    fill(color(colorPlayer));
+
     ellipse(locX/2,locY/2,w/2,w/2);
   }
   this.move = function(dir){
 
-    console.log(dir);
+
     //in the following statements the value of the grid's index equals that of i+j*cols where i represents the current column,
     // j the current row and cols the total amount of columns.
     if(done){
       //up
       if(dir===upInt){
-        console.log("up reached");
         if(gridLocation.walls[upInt]===false){
           locY=locY-(2*w);
           let index = gridLocation.i+gridLocation.j*cols-cols;
           gridLocation=grid[index];
-          console.log(gridLocation);
+
         }
 
         //right
@@ -108,7 +115,7 @@ function Player(){
           locX=locX+(2*w);
           let index = gridLocation.i+1+gridLocation.j*cols;
           gridLocation=grid[index];
-          console.log(gridLocation);
+
         }
 
         //down
@@ -117,9 +124,6 @@ function Player(){
           locY=locY+(2*w);
           let index = gridLocation.i+gridLocation.j*cols+cols;
           gridLocation=grid[index];
-
-          console.log(gridLocation);
-          console.log("end test");
         }
 
         //left
@@ -128,15 +132,13 @@ function Player(){
           locX=locX-(2*w);
           let index = gridLocation.i-1+gridLocation.j*cols;
           gridLocation=grid[index];
-          console.log(gridLocation);
-        }
+                }
 
       }
     }
 
 
     if(gridLocation===grid[grid.length-1]){
-      console.log("player wins");
       winLevel();
     }
 
@@ -151,17 +153,17 @@ function removeWalls(a, b){
    if (x === 1) {
      a.walls[3] = false;
      b.walls[1] = false;
-     console.log(b);
+
    } else if (x === -1) {
      a.walls[1] = false;
      b.walls[3] = false;
-     console.log(b);
+
    }
    let y = a.j - b.j;
    if (y === 1) {
      a.walls[0] = false;
      b.walls[2] = false;
-     console.log(b);
+
    } else if (y === -1) {
      a.walls[2] = false;
      b.walls[0] = false;
@@ -169,7 +171,7 @@ function removeWalls(a, b){
  }
 
  function keyPressed() {
-   console.log(key);
+
 
    let dir=0;
    if (key === 'w' || key === 'W'||keyCode ===UP_ARROW) {
@@ -180,7 +182,7 @@ function removeWalls(a, b){
    }
 
    if (key === 'd' || key === 'D'||keyCode ===RIGHT_ARROW) {
-     console.log("d pressed");
+
      dir=rightInt;
      if(currentPlayer){
       currentPlayer.move(dir);
@@ -206,9 +208,8 @@ function removeWalls(a, b){
 
  }
  function winLevel() {
+   wincount++;
    done=false;
-   console.log("we won!");
-
 
    winText = createP('You Win!')
    winText.position(width / 2 -50, 80);
@@ -217,9 +218,24 @@ function removeWalls(a, b){
 
    rect(0, 0, cols, rows);
    clear();
-   background(0);
+   background(colorBackgroundOnWin);
    noErase();
+   console.log(wincount);
+
+   console.log(w);
 sleep(2000).then(function(){
+  switch (wincount) {
+    case 1:w=floor(w/2);
+
+      break;
+     case 2:w=floor(w/2);
+     break;
+     case 3:w=floor(w/2);
+     break;
+
+    default:
+
+  }
   breakDown();
     setup();
 })
