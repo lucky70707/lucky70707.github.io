@@ -1,4 +1,6 @@
 let cols, rows;
+let width=800;
+let height=800;
 let w =160;
 let grid= [];
 
@@ -18,17 +20,20 @@ let wincount=0;
 
 //color values
 let colorPlayer = 255;
-let colorPlayerStroke =0;
-let colorStart ='#F8EDED';  //'#A0937D';
-let colorFinish = '#F6DFEB';//'#3A6351';
-let colorMaze = '#CAF7E3';  //'#5F939A';
-let colorWalls = 0;
+let colorPlayerStroke =255;
+let colorStart =  '#'+'810034';//'#A0937D';
+let colorFinish ='#'+'FF005C';//'#F6DFEB'; //'#3A6351';
+let colorMaze = '#'+'26001B';  //'#5F939A';
+let colorWalls = 255;
 let colorBackground=51;
 let colorBackgroundOnWin=0;
+let colorText=255;
+
 
 
 function  setup(){
-  createCanvas(800,800);
+  let cnv =createCanvas(width,height);
+  cnv.position(floor((width/2)),floor(windowHeight/10))
   cols =floor(width/w);
   rows = floor(height/w)
   //framerate(5);
@@ -212,7 +217,7 @@ function removeWalls(a, b){
    done=false;
 
    winText = createP('You Win!')
-   winText.position(width / 2 -50, 80);
+   winText.position(windowWidth / 2 , 20);
    winText.style('display','block');
    erase();
 
@@ -225,12 +230,18 @@ function removeWalls(a, b){
    console.log(w);
 sleep(2000).then(function(){
   switch (wincount) {
-    case 1:w=floor(w/2);
-
+    case 1:
+      w=floor(w/2);
       break;
-     case 2:w=floor(w/2);
+     case 2:
+     w=floor(w/2);
      break;
-     case 3:w=floor(w/2);
+     case 3:
+     w=floor(w/2);
+     break;
+     case 4:
+     paletteMintyTrans();
+     wincount =0;
      break;
 
     default:
@@ -255,4 +266,55 @@ function sleep(millisecondsDuration)
    winText.style('display','none');
    stack.length=0;
    grid.length=0;
+ }
+//touch controls
+let startX;
+let startY;
+let endY;
+let endX;
+function touchStarted(){
+  startX=touchX;
+  startY=touchY;
+}
+ function touchMoved(){
+ endX=ptouchX;
+ endY=ptouchY;
+  //line(touchX, touchY, ptouchX, ptouchY);
+  return false;
+}
+
+function touchEnded(){
+  let dir;
+  let difX=startX-endX;
+  let difY=startY-endY;
+  if(abs(difX)>abs(difY)){
+    if(difX>0){
+      dir=leftInt;
+      currentPlayer.move(dir);
+    }else if (difX<0) {
+      dir=rightInt;
+      currentPlayer.move(dir);
+    }
+  }else if (abs(difX)<abs(difY)) {
+    if(difY>0){
+      dir=downInt;
+      currentPlayer.move(dir);
+    }else if (difY<0) {
+      dir=upInt;
+      currentPlayer.move(dir);
+    }
+  }
+
+  return false;
+}
+ function paletteMintyTrans(){
+   colorPlayer = 0;
+   colorPlayerStroke =0;
+   colorStart =  255;//'#A0937D';
+   colorFinish ='#EDBFD7';//'#F6DFEB'; //'#3A6351';
+   colorMaze = '#CAF7E3';  //'#5F939A';
+   colorWalls = 0;
+   colorBackground=51;
+   colorBackgroundOnWin=0;
+   colorText=0;
  }
