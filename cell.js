@@ -44,7 +44,7 @@ function Cell(i,j,cols,rows){
     //this.walls=[true,true,true,true]
 
     stroke(colorWalls);
-
+    strokeWeight(2);
     if(this.walls[0]){
       line(x    ,y    ,x+w  ,y);}
 
