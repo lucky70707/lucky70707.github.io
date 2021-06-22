@@ -13,9 +13,12 @@ let rightInt=1;
 let downInt=2;
 let leftInt=3;
 
+let winText;
+
+
 
 function  setup(){
-  createCanvas(1200,800);
+  createCanvas(800,800);
   cols =floor(width/w);
   rows = floor(height/w)
   //framerate(5);
@@ -33,6 +36,7 @@ function  setup(){
 }
 
 function draw(){
+
   background(51);
 for (let i = 0; i < grid.length; i++) {
   grid[i].show();
@@ -77,57 +81,59 @@ function Player(){
   let locY=0+w;
   let gridLocation=grid[0];
   this.drawPlayer = function(){
-    console.log("drawPlayer function reached");
+
     stroke(255);
     fill(255,255,255,100);
     ellipse(locX/2,locY/2,w/2,w/2);
   }
   this.move = function(dir){
-    console.log("move function reached")
+
     console.log(dir);
     //in the following statements the value of the grid's index equals that of i+j*cols where i represents the current column,
     // j the current row and cols the total amount of columns.
+    if(done){
+      //up
+      if(dir===upInt){
+        console.log("up reached");
+        if(gridLocation.walls[upInt]===false){
+          locY=locY-(2*w);
+          let index = gridLocation.i+gridLocation.j*cols-cols;
+          gridLocation=grid[index];
+          console.log(gridLocation);
+        }
 
-    //up
-    if(dir===upInt){
-      console.log("up reached");
-      if(gridLocation.walls[upInt]===false){
-        locY=locY-(2*w);
-        let index = gridLocation.i+gridLocation.j*cols-cols;
-        gridLocation=grid[index];
-        console.log(gridLocation);
+        //right
+      }else if (dir===rightInt) {
+        if(gridLocation.walls[rightInt]===false){
+          locX=locX+(2*w);
+          let index = gridLocation.i+1+gridLocation.j*cols;
+          gridLocation=grid[index];
+          console.log(gridLocation);
+        }
+
+        //down
+      }else if (dir===downInt) {
+        if(gridLocation.walls[downInt]===false){
+          locY=locY+(2*w);
+          let index = gridLocation.i+gridLocation.j*cols+cols;
+          gridLocation=grid[index];
+
+          console.log(gridLocation);
+          console.log("end test");
+        }
+
+        //left
+      }else if (dir===leftInt) {
+        if(gridLocation.walls[leftInt]===false){
+          locX=locX-(2*w);
+          let index = gridLocation.i-1+gridLocation.j*cols;
+          gridLocation=grid[index];
+          console.log(gridLocation);
+        }
+
       }
-
-      //right
-    }else if (dir===rightInt) {
-      if(gridLocation.walls[rightInt]===false){
-        locX=locX+(2*w);
-        let index = gridLocation.i+1+gridLocation.j*cols;
-        gridLocation=grid[index];
-        console.log(gridLocation);
-      }
-
-      //down
-    }else if (dir===downInt) {
-      if(gridLocation.walls[downInt]===false){
-        locY=locY+(2*w);
-        let index = gridLocation.i+gridLocation.j*cols+cols;
-        gridLocation=grid[index];
-
-        console.log(gridLocation);
-        console.log("end test");
-      }
-
-      //left
-    }else if (dir===leftInt) {
-      if(gridLocation.walls[leftInt]===false){
-        locX=locX-(2*w);
-        let index = gridLocation.i-1+gridLocation.j*cols;
-        gridLocation=grid[index];
-        console.log(gridLocation);
-      }
-
     }
+
 
     if(gridLocation===grid[grid.length-1]){
       console.log("player wins");
@@ -163,17 +169,17 @@ function removeWalls(a, b){
  }
 
  function keyPressed() {
-
+   console.log(key);
 
    let dir=0;
-   if (key === 'w' || key === 'W') {
+   if (key === 'w' || key === 'W'||keyCode ===UP_ARROW) {
      dir=upInt;
      if(currentPlayer){
       currentPlayer.move(dir);
      }
    }
 
-   if (key === 'd' || key === 'D') {
+   if (key === 'd' || key === 'D'||keyCode ===RIGHT_ARROW) {
      console.log("d pressed");
      dir=rightInt;
      if(currentPlayer){
@@ -182,14 +188,14 @@ function removeWalls(a, b){
      }
 }
 
- if (key === 's' || key === 'S'){
+ if (key === 's' || key === 'S'||keyCode ===DOWN_ARROW){
    dir=downInt;
    if(currentPlayer){
     currentPlayer.move(dir);
 
    }
  }
- if (key === 'a' || key === 'A') {
+ if (key === 'a' || key === 'A'||keyCode ===LEFT_ARROW) {
    dir=leftInt;
    if(currentPlayer){
     currentPlayer.move(dir);
@@ -200,10 +206,37 @@ function removeWalls(a, b){
 
  }
  function winLevel() {
+   done=false;
    console.log("we won!");
 
-   var winText;
+
    winText = createP('You Win!')
    winText.position(width / 2 -50, 80);
    winText.style('display','block');
+   erase();
+
+   rect(0, 0, cols, rows);
+   clear();
+   background(0);
+   noErase();
+sleep(2000).then(function(){
+  breakDown();
+    setup();
+})
+
+ }
+
+
+// a custom 'sleep' or wait' function, that returns a Promise that resolves only after a timeout
+function sleep(millisecondsDuration)
+{
+  return new Promise((resolve) => {
+    setTimeout(resolve, millisecondsDuration);
+  })
+}
+
+ function breakDown(){
+   winText.style('display','none');
+   stack.length=0;
+   grid.length=0;
  }
