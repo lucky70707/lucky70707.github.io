@@ -19,8 +19,8 @@ let wincount=0;
 //color values
 let colorPlayer = 255;
 let colorPlayerStroke =0;
-let colorStart = '#F6DFEB'; //'#A0937D';
-let colorFinish ='#F8EDED'; //'#3A6351';
+let colorStart ='#F8EDED';  //'#A0937D';
+let colorFinish = '#F6DFEB';//'#3A6351';
 let colorMaze = '#CAF7E3';  //'#5F939A';
 let colorWalls = 0;
 let colorBackground=51;
