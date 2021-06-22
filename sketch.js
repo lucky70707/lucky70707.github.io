@@ -272,18 +272,27 @@ let startX;
 let startY;
 let endY;
 let endX;
+
 function touchStarted(){
-  startX=touchX;
-  startY=touchY;
+  startX=mouseX;
+  startY=mouseY;
+  console.log(startX);
 }
+function mousePressed(){
+  startX=mouseX;
+  startY=mouseY;
+  console.log(startX);
+}
+
  function touchMoved(){
- endX=ptouchX;
- endY=ptouchY;
-  //line(touchX, touchY, ptouchX, ptouchY);
+ endX=mouseX;
+ endY=mouseY;
+ //console.log(endX);
   return false;
 }
 
 function touchEnded(){
+  //console.log(startX);
   let dir;
   let difX=startX-endX;
   let difY=startY-endY;
@@ -296,10 +305,10 @@ function touchEnded(){
       currentPlayer.move(dir);
     }
   }else if (abs(difX)<abs(difY)) {
-    if(difY>0){
+    if(difY<0){
       dir=downInt;
       currentPlayer.move(dir);
-    }else if (difY<0) {
+    }else if (difY>0) {
       dir=upInt;
       currentPlayer.move(dir);
     }
