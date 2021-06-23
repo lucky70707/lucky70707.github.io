@@ -1,12 +1,44 @@
-function Cell(i,j,cols,rows){
+function Cell(i,j,cols,rows,setId){
 
 
   this.i = i;
   this.j =j;
+  this.setId=setId
+
   this.walls=[true,true,true,true]
   this.visited = false;
 
+  this.checkKruskalNeighbors= function(){
+    let neighbors = [];
 
+    let top     = grid[index(i   ,j-1)]
+    let right   = grid[index(i+1 ,j)]
+    let bottom  = grid[index(i   ,j+1)]
+    let left    = grid[index(i-1 ,j)]
+
+    if(top){
+      neighbors.push(top);
+    }
+    if(right){
+      neighbors.push(right);
+    }
+    if(bottom){
+      neighbors.push(bottom);
+    }
+    if(left){
+      neighbors.push(left);
+    }
+
+    if(neighbors.length>0){
+      let r=floor(random(0,neighbors.length));
+      return neighbors[r];
+    }else{
+      console.log("no neighbors");
+      return undefined;
+    }
+
+
+  }
   this.checkNeighbors= function(){
     let neighbors = [];
 
@@ -74,12 +106,6 @@ function Cell(i,j,cols,rows){
         fill(color(colorMaze));
         rect(x,y,w,w);
       }
-
-
     }
-
-
   }
-
-
 }

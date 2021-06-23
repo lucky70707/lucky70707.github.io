@@ -1,7 +1,8 @@
 let cols, rows;
 let width=800;
 let height=800;
-let w =160;
+let defaultW=160;
+let w =defaultW;
 let grid= [];
 
 let current;
@@ -17,19 +18,11 @@ let leftInt=3;
 
 let winText;
 let wincount=0;
+let currentCell = 0;
 
-//color values
-let colorPlayer = 255;
-let colorPlayerStroke =255;
-let colorStart =  '#'+'810034';//'#A0937D';
-let colorFinish ='#'+'FF005C';//'#F6DFEB'; //'#3A6351';
-let colorMaze = '#'+'26001B';  //'#5F939A';
-let colorWalls = 255;
-let colorBackground=51;
-let colorBackgroundOnWin=0;
-let colorText=255;
+let edges;
 
-
+let arrayEmptied=false;
 
 function  setup(){
   let cnv =createCanvas(width,height);
@@ -40,47 +33,96 @@ function  setup(){
 
   for(let j   =0; j < rows; j++){
     for(let i =0; i < cols; i++){
-      let cell = new Cell(i,j,cols,rows);
+      let cell = new Cell(i,j,cols,rows,grid.length);
       grid.push(cell);
     }
   }
+  edges=[...grid];
 
   current=grid[0];
   currentPlayer=new Player();
 
 }
+function generateDepthFirstMaze(){
+  current.visited = true;
+
+  // STEP 1
+  let next = current.checkNeighbors();
+  if (next) {
+      next.visited = true;
+      //step 2
+      stack.push(current);
+      //step 3
+      removeWalls(current,next)
+      //step 4
+      current=next;
+    }else if(stack.length>0){
+      current=stack.pop();
+
+  }else{
+    while(done!==true){
+        done=true;
+
+    }
+    currentPlayer.drawPlayer();
+  }
+}
 
 function draw(){
-
   background(colorBackground);
 for (let i = 0; i < grid.length; i++) {
   grid[i].show();
 }
 
-current.visited = true;
+ generateDepthFirstMaze();
+//generateKruskalMaze();
 
-// STEP 1
-let next = current.checkNeighbors();
-if (next) {
-    next.visited = true;
-    //step 2
-    stack.push(current);
-    //step 3
-    removeWalls(current,next)
-    //step 4
-    current=next;
-  }else if(stack.length>0){
-    current=stack.pop();
+}
+//kruskal's algorithm/*
+/*algorithm explained in own words:
+alle cellen behoren tot een tree.
+kies een willekeurige cell
+kies een willekeurige buurcell
+als buurcell tot een andere tree behoort
+  dan zorg ervoor dat de andere cell tot dezelfde tree behoort
+zo niet, haal dan de cel weg.
+*/
+function generateKruskalMaze(){
 
-}else{
-  while(done!==true){
-      done=true;
+
+  while(edges.length>0){
+    currentCell=edges[floor(random(0,edges.length))];
+    console.log(currentCell);
+    let next= currentCell.checkKruskalNeighbors();
+    console.log(next);
+    console.log('currentId',currentCell.setId,' next id',next.setId);
+    if(currentCell.setId!==next.setId){
+      console.log('recognised as different');
+      removeWalls(next,currentCell)
+      //set the setId of next and all the other cells with next their setID to that of currentCell
+
+    }else{
+      console.log('recognised as same');
+      for(i=0;i>edges.length;i++){
+        if(edges[i].setId===next.setId){
+          edges.splice(next.id,1);
+
+        }
+      }
+
+      console.log(edges.length);
+
+    }
+
 
   }
-  currentPlayer.drawPlayer();
-}
+  if(arrayEmptied){
+    console.log(grid);
+    arrayEmptied=true;
+  }
 
 }
+
 function index(i,j){
   if (i < 0 || j < 0 || i > cols - 1 || j > rows - 1) {
    return -1;
@@ -88,68 +130,7 @@ function index(i,j){
  return i + j * cols;
 }
 
-function Player(){
-  let locX=0+w;
-  let locY=0+w;
-  let gridLocation=grid[0];
-  this.drawPlayer = function(){
 
-    stroke(colorPlayerStroke);
-    fill(color(colorPlayer));
-
-    ellipse(locX/2,locY/2,w/2,w/2);
-  }
-  this.move = function(dir){
-
-
-    //in the following statements the value of the grid's index equals that of i+j*cols where i represents the current column,
-    // j the current row and cols the total amount of columns.
-    if(done){
-      //up
-      if(dir===upInt){
-        if(gridLocation.walls[upInt]===false){
-          locY=locY-(2*w);
-          let index = gridLocation.i+gridLocation.j*cols-cols;
-          gridLocation=grid[index];
-
-        }
-
-        //right
-      }else if (dir===rightInt) {
-        if(gridLocation.walls[rightInt]===false){
-          locX=locX+(2*w);
-          let index = gridLocation.i+1+gridLocation.j*cols;
-          gridLocation=grid[index];
-
-        }
-
-        //down
-      }else if (dir===downInt) {
-        if(gridLocation.walls[downInt]===false){
-          locY=locY+(2*w);
-          let index = gridLocation.i+gridLocation.j*cols+cols;
-          gridLocation=grid[index];
-        }
-
-        //left
-      }else if (dir===leftInt) {
-        if(gridLocation.walls[leftInt]===false){
-          locX=locX-(2*w);
-          let index = gridLocation.i-1+gridLocation.j*cols;
-          gridLocation=grid[index];
-                }
-
-      }
-    }
-
-
-    if(gridLocation===grid[grid.length-1]){
-      winLevel();
-    }
-
-  }
-
-}
 
 
 
@@ -175,50 +156,17 @@ function removeWalls(a, b){
    }
  }
 
- function keyPressed() {
 
-
-   let dir=0;
-   if (key === 'w' || key === 'W'||keyCode ===UP_ARROW) {
-     dir=upInt;
-     if(currentPlayer){
-      currentPlayer.move(dir);
-     }
-   }
-
-   if (key === 'd' || key === 'D'||keyCode ===RIGHT_ARROW) {
-
-     dir=rightInt;
-     if(currentPlayer){
-      currentPlayer.move(dir);
-
-     }
-}
-
- if (key === 's' || key === 'S'||keyCode ===DOWN_ARROW){
-   dir=downInt;
-   if(currentPlayer){
-    currentPlayer.move(dir);
-
-   }
- }
- if (key === 'a' || key === 'A'||keyCode ===LEFT_ARROW) {
-   dir=leftInt;
-   if(currentPlayer){
-    currentPlayer.move(dir);
-
-   }
- }
-
-
- }
  function winLevel() {
    wincount++;
    done=false;
+   fill(colorText);
 
    winText = createP('You Win!')
    winText.position(windowWidth / 2 , 20);
+   winText.style('color', color(colorText));
    winText.style('display','block');
+
    erase();
 
    rect(0, 0, cols, rows);
@@ -241,6 +189,7 @@ sleep(2000).then(function(){
      break;
      case 4:
      paletteMintyTrans();
+     w=defaultW;
      wincount =0;
      break;
 
@@ -266,64 +215,4 @@ function sleep(millisecondsDuration)
    winText.style('display','none');
    stack.length=0;
    grid.length=0;
- }
-//touch controls
-let startX;
-let startY;
-let endY;
-let endX;
-
-function touchStarted(){
-  startX=mouseX;
-  startY=mouseY;
-  console.log(startX);
-}
-function mousePressed(){
-  startX=mouseX;
-  startY=mouseY;
-  console.log(startX);
-}
-
- function touchMoved(){
- endX=mouseX;
- endY=mouseY;
- //console.log(endX);
-  return false;
-}
-
-function touchEnded(){
-  //console.log(startX);
-  let dir;
-  let difX=startX-endX;
-  let difY=startY-endY;
-  if(abs(difX)>abs(difY)){
-    if(difX>0){
-      dir=leftInt;
-      currentPlayer.move(dir);
-    }else if (difX<0) {
-      dir=rightInt;
-      currentPlayer.move(dir);
-    }
-  }else if (abs(difX)<abs(difY)) {
-    if(difY<0){
-      dir=downInt;
-      currentPlayer.move(dir);
-    }else if (difY>0) {
-      dir=upInt;
-      currentPlayer.move(dir);
-    }
-  }
-
-  return false;
-}
- function paletteMintyTrans(){
-   colorPlayer = 0;
-   colorPlayerStroke =0;
-   colorStart =  255;//'#A0937D';
-   colorFinish ='#EDBFD7';//'#F6DFEB'; //'#3A6351';
-   colorMaze = '#CAF7E3';  //'#5F939A';
-   colorWalls = 0;
-   colorBackground=51;
-   colorBackgroundOnWin=0;
-   colorText=0;
  }
