@@ -18,7 +18,7 @@ function paletteMintyTrans(){
   colorWalls = 0;
   colorBackground=51;
   colorBackgroundOnWin=0;
-  colorText=0;
+  colorText=255;
 }
 
 function paletteCyberGermany(){
@@ -30,5 +30,5 @@ function paletteCyberGermany(){
   colorWalls = 255;
   colorBackground=51;
   colorBackgroundOnWin=0;
-  colorText=0;
+  colorText=255;
 }
