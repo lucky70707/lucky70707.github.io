@@ -7,7 +7,7 @@ let colorMaze = '#'+'26001B';  //'#5F939A';
 let colorWalls = 255;
 let colorBackground=51;
 let colorBackgroundOnWin=0;
-let colorText=0;
+let colorText=255;
 
 function paletteMintyTrans(){
   colorPlayer = 0;

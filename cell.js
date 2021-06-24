@@ -8,61 +8,7 @@ function Cell(i,j,cols,rows){
   this.walls=[true,true,true,true]
 
   this.visited = false;
-
-  this.checkKruskalNeighbors= function(){
-    let neighbors = [];
-
-    let top     = grid[index(i   ,j-1)]
-    let right   = grid[index(i+1 ,j)]
-    let bottom  = grid[index(i   ,j+1)]
-    let left    = grid[index(i-1 ,j)]
-
-    let topVisited =false;
-    let rightVisited =false;
-    let bottomVisited =false;
-    let leftVisited =false;
-
-    if(top&&!topVisited){
-      neighbors.push(top);
-    }
-    if(right&&!rightVisited){
-      neighbors.push(right);
-    }
-    if(bottom&&!bottomVisited){
-      neighbors.push(bottom);
-    }
-    if(left&&!leftVisited){
-      neighbors.push(left);
-    }
-
-    if(neighbors.length>0){
-      let r=floor(random(0,neighbors.length));
-      switch (neighbors[r]) {
-        case top:topVisited=true;
-
-          break;
-        case right:rightVisited=true;
-
-          break;
-        case bottom: bottomVisited=true;
-
-          break;
-
-        case left: leftVisited=true;
-
-          break;
-        default:
-
-      }
-      return neighbors[r];
-    }else{
-      console.log("no neighbors");
-      return undefined;
-    }
-
-
-  }
-
+  
   this.checkNeighbors= function(){
     let neighbors = [];
 
@@ -88,11 +34,7 @@ function Cell(i,j,cols,rows){
       let r=floor(random(0,neighbors.length));
       return neighbors[r];
     }else{
-      /*console.log("topindex: ",index(i   ,j-1));
-      console.log("rightIndex: ",index(i+1 ,j));
-      console.log("bottomindex: ",index(i   ,j+1));
-      console.log("leftindex: ",index(i-1 ,j));*/
-      //107,124,139,122
+
       return undefined;
     }
 

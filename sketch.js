@@ -67,9 +67,10 @@ switch (difficulty) {
 }
 
 function setupDepthFirstMaze() {
-current=grid[0];
-console.log(grid);
-console.log(current);
+  paletteCyberGermany();
+  current=grid[0];
+  console.log(grid);
+  console.log(current);
 }
 
 
