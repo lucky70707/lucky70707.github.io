@@ -2,6 +2,8 @@ let cols, rows;
 let width=800;
 let height=800;
 let defaultW=160;
+let cnv;
+
 let w =defaultW;
 let grid= [];
 
@@ -30,7 +32,7 @@ let mazeGenerated=false;
 let setupDone=false;
 
 function  setup(){
-  let cnv =createCanvas(width,height);
+   cnv =createCanvas(width,height);
   cnv.position(floor((windowWidth/2)-width/2),floor(windowHeight/10))
   cols =floor(width/w);
   rows = floor(height/w)
@@ -155,7 +157,7 @@ function removeWalls(a, b){
    winText.style('font-size', '500%');
    winText.style('text-align', 'center');
    winText.style('display','block');
-   winText.position((windowWidth / 2)-(winText.width/4) , windowHeight/2-(winText.height*2));
+   winText.position(floor((windowWidth/2)-width/4),floor(windowHeight/8));
 
    erase();
 
