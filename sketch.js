@@ -21,28 +21,46 @@ let wincount=0;
 let currentCell = 0;
 
 let edges;
+let nodes=[];
+let sets;
 
-let arrayEmptied=false;
+let mazeGenerated=false;
 
 function  setup(){
   let cnv =createCanvas(width,height);
-  cnv.position(floor((width/2)),floor(windowHeight/10))
+  cnv.position(floor((windowWidth/2)-width/2),floor(windowHeight/10))
   cols =floor(width/w);
   rows = floor(height/w)
-  //framerate(5);
+  //frameRate(5);
 
-  for(let j   =0; j < rows; j++){
-    for(let i =0; i < cols; i++){
-      let cell = new Cell(i,j,cols,rows,grid.length);
-      grid.push(cell);
-    }
-  }
-  edges=[...grid];
+  setupKruskalMaze();
+
 
   current=grid[0];
   currentPlayer=new Player();
 
 }
+function setupKruskalMaze(){
+  edges=[];
+
+
+
+  for(let j   =0; j < rows; j++){
+    for(let i =0; i < cols; i++){
+      let cell = new Cell(i,j,cols,rows,grid.length);
+      grid.push(cell);
+
+    }
+  }
+  edges =formEdgeList(cols,rows);
+
+
+  for(let i=0; i<grid.length;i++){
+    nodes.push(new Node(grid[i],i));
+  }
+  sets= new DisJointSet(nodes);
+}
+
 function generateDepthFirstMaze(){
   current.visited = true;
 
@@ -74,7 +92,7 @@ for (let i = 0; i < grid.length; i++) {
   grid[i].show();
 }
 
- generateDepthFirstMaze();
+generateDepthFirstMaze();
 //generateKruskalMaze();
 
 }
@@ -87,39 +105,72 @@ als buurcell tot een andere tree behoort
   dan zorg ervoor dat de andere cell tot dezelfde tree behoort
 zo niet, haal dan de cel weg.
 */
+let failsafeIndex =0;
 function generateKruskalMaze(){
 
+  if(mazeGenerated){
+    console.log("player is drawn: ",mazeGenerated);
+    while(done!==true){
+        done=true;
 
-  while(edges.length>0){
-    currentCell=edges[floor(random(0,edges.length))];
-    console.log(currentCell);
-    let next= currentCell.checkKruskalNeighbors();
-    console.log(next);
-    console.log('currentId',currentCell.setId,' next id',next.setId);
-    if(currentCell.setId!==next.setId){
-      console.log('recognised as different');
-      removeWalls(next,currentCell)
+    }
+    currentPlayer.drawPlayer();
+  }
+  while(edges.length>0&&mazeGenerated===false){
+    failsafeIndex++;
+    console.log("edges length=",edges.length);
+    if(edges.length===1){
+      console.log(mazeGenerated);
+      mazeGenerated=true;
+    }
+  //  console.log(edges);
+    let pair =edges[floor(random(0,edges.length-1))]
+    //console.log("pair: ",pair);
+    let startnodeIndex=pair.startnode;
+    //console.log("startnodeIndex: ",startnodeIndex);
+    let nextIndex=pair.endnode;
+  //  console.log("startnodeIndex: ",nextIndex);
+
+    currentNode=nodes[startnodeIndex];
+    nextNode=nodes[nextIndex];
+
+    if(sets.find(currentNode)!==sets.find(nextNode)){
+      //console.log('recognised as different');
+      sets.union(currentNode,nextNode)
+      removeWalls(nextNode.data,currentNode.data);
+      currentNode.data.visited=true;
+      nextNode.data.visited=true;
+
       //set the setId of next and all the other cells with next their setID to that of currentCell
 
     }else{
-      console.log('recognised as same');
-      for(i=0;i>edges.length;i++){
-        if(edges[i].setId===next.setId){
-          edges.splice(next.id,1);
+      //console.log("pair to be deleted: ",pair);
+      //console.log("before splice:",edges.length);
 
+        let indexOfTobedeleted=pair.id;
+        for(let i=0;i<edges.length;i++){
+          if(edges[i].id===pair.id){
+            indexOfTobedeleted =i;
+          }
         }
+
+        edges.splice(indexOfTobedeleted,1);
+        //console.log("after splice:",edges.length);
+
+
+
+      //  console.log("edge with id: ",nextNode.id," should be removed");
+/*
+        if(!nextNode.data.checkKruskalNeighbors()){
+          edges.splice(nextNode,1);
+        }
+        if(!currentNode.data.checkKruskalNeighbors()){
+          edges.splice(currentNode,1);
+        }
+*/
       }
 
-      console.log(edges.length);
-
     }
-
-
-  }
-  if(arrayEmptied){
-    console.log(grid);
-    arrayEmptied=true;
-  }
 
 }
 
@@ -129,9 +180,6 @@ function index(i,j){
  }
  return i + j * cols;
 }
-
-
-
 
 
 function removeWalls(a, b){
@@ -192,7 +240,6 @@ sleep(2000).then(function(){
      w=defaultW;
      wincount =0;
      break;
-
     default:
 
   }

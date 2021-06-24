@@ -19,8 +19,8 @@ function Player(){
       if(dir===upInt){
         if(gridLocation.walls[upInt]===false){
           locY=locY-(2*w);
-          let index = gridLocation.i+gridLocation.j*cols-cols;
-          gridLocation=grid[index];
+        let currentIndex =  index(gridLocation.i,gridLocation.j)-cols;
+          gridLocation=grid[currentIndex];
 
         }
 
@@ -28,8 +28,8 @@ function Player(){
       }else if (dir===rightInt) {
         if(gridLocation.walls[rightInt]===false){
           locX=locX+(2*w);
-          let index = gridLocation.i+1+gridLocation.j*cols;
-          gridLocation=grid[index];
+          let currentIndex =  index(gridLocation.i,gridLocation.j)+1; //gridLocation.i+1+gridLocation.j*cols;
+          gridLocation=grid[currentIndex];
 
         }
 
@@ -37,16 +37,17 @@ function Player(){
       }else if (dir===downInt) {
         if(gridLocation.walls[downInt]===false){
           locY=locY+(2*w);
-          let index = gridLocation.i+gridLocation.j*cols+cols;
-          gridLocation=grid[index];
+          let currentIndex = index(gridLocation.i,gridLocation.j)+cols;
+          gridLocation=grid[currentIndex];
         }
 
         //left
       }else if (dir===leftInt) {
         if(gridLocation.walls[leftInt]===false){
           locX=locX-(2*w);
-          let index = gridLocation.i-1+gridLocation.j*cols;
-          gridLocation=grid[index];
+
+          let currentIndex = index(gridLocation.i,gridLocation.j)-1;
+          gridLocation=grid[currentIndex];
                 }
 
       }
