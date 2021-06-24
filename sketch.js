@@ -155,7 +155,7 @@ function removeWalls(a, b){
    winText.style('font-size', '500%');
    winText.style('text-align', 'center');
    winText.style('display','block');
-   winText.position((windowWidth / 2)-(winText.width/4) , windowHeight/2-(winText.height/4));
+   winText.position((windowWidth / 2)-(winText.width/4) , windowHeight/2-(winText.height*2));
 
    erase();
 
