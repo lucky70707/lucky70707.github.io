@@ -1,5 +1,5 @@
 function setupKruskalMaze(){
-
+paletteMintyTrans();
   edges =formEdgeList(cols,rows);
   for(let i=0; i<grid.length;i++){
     nodes.push(new Node(grid[i],i));

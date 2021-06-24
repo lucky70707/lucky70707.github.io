@@ -99,8 +99,6 @@ function draw(){
 for (let i = 0; i < grid.length; i++) {
   grid[i].show();
 }
-  
-
   switch (difficulty) {
     case 0:
       generateDepthFirstMaze();
@@ -112,9 +110,7 @@ for (let i = 0; i < grid.length; i++) {
     difficulty=0;
     generateDepthFirstMaze();
     break;
-
   }
-
 }
 
 function index(i,j){
@@ -159,7 +155,7 @@ function removeWalls(a, b){
    winText.style('font-size', '500%');
    winText.style('text-align', 'center');
    winText.style('display','block');
-   winText.position((windowWidth / 2)-(winText.width/4) , windowHeight/2);
+   winText.position((windowWidth / 2)-(winText.width/4) , windowHeight/2-(winText.height/4));
 
    erase();
 
@@ -184,7 +180,6 @@ sleep(2000).then(function(){
      break;
      case 4:
      difficulty++;
-     paletteMintyTrans();
      w=defaultW;
      wincount =0;
      break;
