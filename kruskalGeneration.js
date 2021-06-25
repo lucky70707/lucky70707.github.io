@@ -34,7 +34,7 @@ function generateKruskalMaze(){
   }
   //while(edges.length>0&&mazeGenerated===false){
     failsafeIndex++;
-    if(edges.length===1){
+    if(edges.length===0){
       console.log(mazeGenerated);
       mazeGenerated=true;
     }
