@@ -30,7 +30,7 @@ function generateKruskalMaze(){
         done=true;
 
     }
-    currentPlayer.drawPlayer();
+    if(currentPlayer){currentPlayer.drawPlayer();}
   }
   //while(edges.length>0&&mazeGenerated===false){
     failsafeIndex++;
