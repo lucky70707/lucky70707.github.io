@@ -5,3 +5,6 @@ Previous project is a game of brick breaker based on the code by Yining shi as s
 The project is a work in process and made using p5.js
 current project is a maze game that generates on the spot.
 www.lucky70707.github.io
+
+
+https://lucky70707.github.io/
