@@ -21,7 +21,7 @@ let leftInt=3;
 //level creation decision variables;
 let winText;
 let wincount=0;
-let difficulty=0;
+let difficulty=2;
 
 //required for kruskal generation
 let edges=[];
@@ -53,8 +53,7 @@ for(let j   =0; j < rows; j++){
 
   }
 }
-
-
+//decide on generation
 switch (difficulty) {
   case 0:
     setupDepthFirstMaze();
@@ -63,50 +62,16 @@ switch (difficulty) {
       setupKruskalMaze();
       break;
     case 2:
-    setupPrimsMaze();      
+    setupPrimsMaze();
       break;
   default:
   difficulty=0;
   setupDepthFirstMaze();
   break;
-
 }
-
-
   currentPlayer=new Player();
-
 }
 
-function setupDepthFirstMaze() {
-  paletteCyberGermany();
-  current=grid[0];
-  console.log(grid);
-  console.log(current);
-}
-
-
-function generateDepthFirstMaze(){
-    current.visited = true;
-    // STEP 1
-    let next = current.checkNeighbors();
-    if (next) {
-        next.visited = true;
-        //step 2
-        stack.push(current);
-        //step 3
-        removeWalls(current,next)
-        //step 4
-        current=next;
-      }else if(stack.length>0){
-        current=stack.pop();
-
-    }else{
-      while(done!==true){
-          done=true;
-      }
-      if(currentPlayer){currentPlayer.drawPlayer();}
-    }
-}
 
 function draw(){
   background(colorBackground);
@@ -160,71 +125,4 @@ function removeWalls(a, b){
      a.walls[2] = false;
      b.walls[0] = false;
    }
- }
-
-
- function winLevel() {
-   wincount++;
-   done=false;
-   fill(colorText);
-
-   winText= createP('You Win!');
-
-   winText.style('color', color(colorText));
-   winText.style('font-size', '500%');
-   winText.style('text-align', 'center');
-   winText.style('display','block');
-   winText.position(floor((windowWidth/2)-width/4),floor(windowHeight/8));
-
-   erase();
-
-   rect(0, 0, cols, rows);
-   clear();
-   background(colorBackgroundOnWin);
-   noErase();
-   console.log(wincount);
-
-   console.log(w);
-   breakDown();
-sleep(2000).then(function(){
-  switch (wincount) {
-    case 1:
-      w=floor(w/2);
-      break;
-     case 2:
-     w=floor(w/2);
-     break;
-     case 3:
-     w=floor(w/2);
-     break;
-     case 4:
-     difficulty++;
-     w=defaultW;
-     wincount =0;
-     break;
-    default:
-
-  }
-    setup();
-})
-
- }
-
-
-// a custom 'sleep' or wait' function, that returns a Promise that resolves only after a timeout
-function sleep(millisecondsDuration)
-{
-  return new Promise((resolve) => {
-    setTimeout(resolve, millisecondsDuration);
-  })
-}
-
- function breakDown(){
-   setupDone=false;
-   currentPlayer=null;
-   stack.length=0;
-   grid.length=0;
-    edges.length=0;
-    nodes.length=0;
-    sets=0;
  }

@@ -1,10 +1,10 @@
 //color values
-let colorPlayer = 255;
-let colorPlayerStroke =255;
-let colorStart =  '#'+'810034';//'#A0937D';
-let colorFinish ='#'+'FF005C';//'#F6DFEB'; //'#3A6351';
-let colorMaze = '#'+'26001B';  //'#5F939A';
-let colorWalls = 255;
+let colorPlayer = 0;
+let colorPlayerStroke =0;
+let colorStart =  '#'+'F9B208';//'#A0937D';
+let colorFinish ='#'+'F98404';//'#F6DFEB'; //'#3A6351';
+let colorMaze = '#'+'F7FD04';  //'#5F939A';
+let colorWalls = 0;
 let colorBackground=51;
 let colorBackgroundOnWin=0;
 let colorText=255;
