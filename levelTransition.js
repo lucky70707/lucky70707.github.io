@@ -1,8 +1,9 @@
 function winLevel() {
   wincount++;
+  isWinning=true;
   done=false;
   fill(colorText);
-
+setupFireworks();
   winText= createP('You Win!');
 
   winText.style('color', color(colorText));
@@ -24,7 +25,10 @@ function winLevel() {
 
 
 
-sleep(1000).then(function(){
+
+sleep(3000).then(function(){
+
+
  switch (wincount) {
    case 1:
      w=floor(w/2);
@@ -51,6 +55,7 @@ sleep(1000).then(function(){
 
 
 function breakDown(){
+
   setupDone=false;
   currentPlayer=null;
   stack.length=0;

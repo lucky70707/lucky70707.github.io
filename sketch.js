@@ -22,6 +22,7 @@ let leftInt=3;
 let winText;
 let wincount=0;
 let difficulty=2;
+let isWinning=false;
 
 //required for kruskal generation
 let edges=[];
@@ -38,6 +39,7 @@ let setupDone=false;
 
 function  setup(){
    cnv =createCanvas(width,height);
+   isWinning=false;
   cnv.position(floor((windowWidth/2)-width/2),floor(windowHeight/10))
   cols =floor(width/w);
   rows = floor(height/w)
@@ -74,6 +76,7 @@ switch (difficulty) {
 
 
 function draw(){
+if(!isWinning){
   background(colorBackground);
 for (let i = 0; i < grid.length; i++) {
   grid[i].show();
@@ -94,6 +97,11 @@ for (let i = 0; i < grid.length; i++) {
     generateDepthFirstMaze();
     break;
   }
+}else{
+  drawFireworks();
+}
+
+
 }
 
 function index(i,j){
