@@ -41,7 +41,7 @@ function  setup(){
   cnv.position(floor((windowWidth/2)-width/2),floor(windowHeight/10))
   cols =floor(width/w);
   rows = floor(height/w)
-  //frameRate(5);
+
 if(winText){
   winText.style('display','none');
 }
@@ -53,7 +53,7 @@ for(let j   =0; j < rows; j++){
 
   }
 }
-//setupPrimsMaze();
+
 
 switch (difficulty) {
   case 0:
@@ -62,12 +62,17 @@ switch (difficulty) {
     case 1:
       setupKruskalMaze();
       break;
+    case 2:
+    setupPrimsMaze();      
+      break;
   default:
   difficulty=0;
   setupDepthFirstMaze();
   break;
 
 }
+
+
   currentPlayer=new Player();
 
 }
@@ -108,7 +113,6 @@ function draw(){
 for (let i = 0; i < grid.length; i++) {
   grid[i].show();
 }
-//generatePrimsMaze();
 
   switch (difficulty) {
     case 0:
@@ -117,6 +121,9 @@ for (let i = 0; i < grid.length; i++) {
       case 1:
         generateKruskalMaze();
         break;
+      case 2:
+      generatePrimsMaze()
+      break;
     default:
     difficulty=0;
     generateDepthFirstMaze();
@@ -131,67 +138,7 @@ function index(i,j){
  return i + j * cols;
 }
 
-function setupPrimsMaze(){
-  edges =formEdgeList(cols,rows);
-  for(let i=0; i<grid.length;i++){
-    nodes.push(new Node(grid[i],i));
-  }
-  //sets= new DisJointSet(nodes);
 
-  listFrontier=[];
-  currentCell= nodes[floor(random(0,grid.length-1))].data ;
-  currentCell.visited=true;
-  toconcatwith =currentCell.markFrontier();
-  listFrontier = [...listFrontier.concat(toconcatwith)];
-  nextCell=currentCell.checkNeighbors();
-}
-function generatePrimsMaze(){
-  //  console.log("currentCell",currentCell);
-    if(nextCell){
-
-
-     toconcatwith =nextCell.markFrontier();
-
-    listFrontier = [...listFrontier.concat(toconcatwith)];
-    //console.log("listFrontier:",listFrontier);
-    //console.log("nextCell.visited: ",nextCell.visited,"currentCell.visited: ",currentCell.visited);
-
-    if(nextCell.visited===true&&currentCell.visited===false){
-      //console.log("currentCell: ",currentCell," nextCell: ",nextCell);
-      removeWalls(currentCell,nextCell);
-      currentCell.visited=true;
-    }
-    if(nextCell.visited===false&&currentCell.visited===true){
-      //console.log("currentCell: ",currentCell," nextCell: ",nextCell);
-      removeWalls(currentCell,nextCell);
-      nextCell.visited=true;
-
-    }
-    let indexOfTobedeleted;
-    console.log("deletion to follow:");
-    console.log("listFrontier before delete",listFrontier);
-    console.log("nextCell to be removed",nextCell);
-
-
-    for(let k=0;k<listFrontier.length;k++){
-      if(listFrontier[k].visited){
-        indexOfTobedeleted =k;
-        console.log("listFrontier before splice:",listFrontier);
-        console.log("indexOfTobedeleted: ",indexOfTobedeleted);
-        console.log(listFrontier[k].visited);
-        listFrontier.splice(indexOfTobedeleted,1);
-        console.log("listFrontier after splice:",listFrontier);
-      }
-    }
-    //console.log(listFrontier);
-    currentCell= listFrontier[floor(random(0,listFrontier.length-1))] ;
-    currentCell.visited=true;
-    toconcatwith =currentCell.markFrontier();
-    listFrontier = [...listFrontier.concat(toconcatwith)];
-    nextCell=currentCell.checkPrimNeighbors();
-}
-
-}
 
 function removeWalls(a, b){
   let x = a.i - b.i;
