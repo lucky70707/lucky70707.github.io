@@ -82,6 +82,9 @@ if (key === 'a' || key === 'A'||keyCode ===LEFT_ARROW) {
 
   }
 }
+if (key === 'x' || key === 'X') {
+  currentPlayer.dig();
+}
 
 
 }

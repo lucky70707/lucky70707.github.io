@@ -60,4 +60,11 @@ function Player(){
 
   }
 
+  this.dig=function(){
+    if(gridLocation.isTreasure){
+        score++;
+        gridLocation.isTreasure=false;
+    }
+  }
+
 }

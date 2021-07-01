@@ -4,13 +4,14 @@ function winLevel() {
   done=false;
   fill(colorText);
 setupFireworks();
-  winText= createP('You Win!');
+  winText= createP('Level completed!');
 
   winText.style('color', color(colorText));
-  winText.style('font-size', '500%');
+  winText.style('font-size', '400%');
   winText.style('text-align', 'center');
   winText.style('display','block');
-  winText.position(floor((windowWidth/2)-width/4),floor(windowHeight/8));
+  let offsetWidth= winText.offsetWidth;
+  winText.position(floor((windowWidth/2)-width/2),floor(windowHeight/8));
 
   erase();
 

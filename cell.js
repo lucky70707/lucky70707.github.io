@@ -10,6 +10,8 @@ function Cell(i,j,cols,rows){
   this.visited = false;
   this.isFrontier=false;
 
+  this.isTreasure=false
+
   this.checkNeighbors= function(){
     let neighbors = [];
 
@@ -168,11 +170,17 @@ function Cell(i,j,cols,rows){
         fill(color(colorMaze));
         rect(x,y,w,w);
       }
-    }/*
-    if(this.isFrontier&&this.visited===false){
+    }
+    /*
+    if(this.isFrontier&&!this.visited){
       noStroke();
       fill(color(255));
       rect(x,y,w,w);
     }*/
+    if(this.isTreasure&&this.visited===false){
+      noStroke();
+      fill(color(255));
+      rect(x,y,w,w);
+    }
   }
 }

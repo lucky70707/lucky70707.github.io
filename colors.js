@@ -1,10 +1,10 @@
 //color values
-let colorPlayer = 0;
-let colorPlayerStroke =0;
-let colorStart =  '#'+'F9B208';//'#A0937D';
-let colorFinish ='#'+'F98404';//'#F6DFEB'; //'#3A6351';
-let colorMaze = '#'+'F7FD04';  //'#5F939A';
-let colorWalls = 0;
+let colorPlayer = 255;
+let colorPlayerStroke =255;
+let colorStart =  '#'+'CD113B';//'#A0937D';
+let colorFinish ='#'+'FF7600';//'#F6DFEB'; //'#3A6351';
+let colorMaze = '#'+'52006A';  //'#5F939A';
+let colorWalls = 255;
 let colorBackground=51;
 let colorBackgroundOnWin=0;
 let colorText=255;
@@ -31,4 +31,16 @@ function paletteCyberGermany(){
   colorBackground=51;
   colorBackgroundOnWin=0;
   colorText=255;
+}
+
+function paletteSunset(){
+  let colorPlayer = 255;
+  let colorPlayerStroke =255;
+  let colorStart =  '#'+'CD113B';//'#A0937D';
+  let colorFinish ='#'+'FF7600';//'#F6DFEB'; //'#3A6351';
+  let colorMaze = '#'+'52006A';  //'#5F939A';
+  let colorWalls = 255;
+  let colorBackground=51;
+  let colorBackgroundOnWin=0;
+  let colorText=255;
 }
