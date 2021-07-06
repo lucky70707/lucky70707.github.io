@@ -2,6 +2,7 @@ function setupKruskalMaze() {
   paletteMintyTrans();
   edges = formEdgeList(cols, rows);
   for (let i = 0; i < grid.length; i++) {
+
     nodes.push(new Node(grid[i], i));
   }
   sets = new DisJointSet(nodes);
@@ -26,7 +27,7 @@ let failsafeIndex = 0;
 function generateKruskalMaze() {
 
   if (mazeGenerated) {
-    console.log("player is drawn: ", mazeGenerated);
+    //console.log("player is drawn: ", mazeGenerated);
     while (done !== true) {
       done = true;
 
@@ -37,7 +38,7 @@ function generateKruskalMaze() {
   }
   //while(edges.length>0&&mazeGenerated===false){
   failsafeIndex++;
-  if (edges.length === 0) {
+  if (edges.length === 0&&!mazeGenerated) {
     console.log(mazeGenerated);
     mazeGenerated = true;
   }

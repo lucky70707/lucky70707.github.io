@@ -7,6 +7,14 @@ function Edge(startnode, endnode, id) {
   this.startnode = startnode;
   this.endnode = endnode;
   this.id = id;
+
+  this.checkDuplicate =function (startnode,endnode){
+    if(startnode===this.endnode&&endnode===this.startnode){
+    return  true;
+    }else{
+      return false;
+    }
+  }
 }
 
 class DisJointSet {
@@ -59,50 +67,11 @@ class DisJointSet {
 }
 
 function test() {
-  //test code with integers again and find out whether it works with integers outside of 1 to 5 with given n 5;
-  /*
-  let cell1 = new Cell(1,0,cols,rows);
-  let cell2 = new Cell(2,0,cols,rows);
-  let cell3 = new Cell(3,0,cols,rows);
-
-let node1= new Node(cell1,0);
-let node2=new Node(cell2,1);
-let node3=new Node(cell3,2);
-
-  let n = [node1,node2,node3];
-  */
-
-
   let listOfEdges = formEdgeList(2, 2);
   console.log("edgelist size: ", listOfEdges.length);
   for (let i = 0; i < listOfEdges.length; i++) {
     console.log(listOfEdges[i]);
   }
-
-  /*
-
-    let dus = new DisJointSet(n);
-          //console.log(cell1);
-          console.log(node1);
-          dus.find(node1);
-
-    // 0 is a friend of 2
-          dus.union(node1, node2);
-
-          // 4 is a friend of 2
-          dus.union(node2, node3);
-
-
-          console.log("is 1 friends with 3?");
-          if (dus.find(node1) == dus.find(node3))
-            { console.log("Yes");
-            console.log("node1: ",dus.find(node1));
-            console.log("node3: ",dus.find(node3));}
-         else{
-           console.log("No");
-           console.log("node1: ",dus.find(node1));
-           console.log("node3: ",dus.find(node3));
-         }*/
 
 }
 

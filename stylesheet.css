@@ -1,0 +1,73 @@
+
+  body {
+    padding: 0;
+    margin: 0;
+    background-color: black;
+
+
+    grid-template-columns: 80% 20%;
+
+  }
+
+  canvas {
+    vertical-align: bottom;
+    padding:2%;
+
+  }
+header  {
+ grid-area:header;
+
+}
+
+#leftsidebar{
+grid-area:leftsidebar;
+}
+
+
+#canvasDiv{
+grid-area:canvasDiv;
+
+
+}
+#rightsidebar{
+  grid-area:rightsidebar;
+}
+#articleInstruction{
+grid-area:articleInstruction;
+
+}
+
+#scoreParagraph{
+font-weight: bold;
+}
+footer{
+  grid-area:footer;
+
+
+}
+  html {
+    font-family: monospace;
+    color: #333;
+    font-size: 20px;
+
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: 10% 60% 20% 10%;
+      grid-template-rows: auto;
+    height: 100vh;
+    background-color: white;
+
+    grid-template-areas:
+    "header header header header"
+    "leftsidebar canvasDiv articleInstruction rightsidebar"
+    "footer footer footer footer";
+
+}
+
+  .grid-item {
+
+    //border: 1px solid rgba(0, 0, 0, 0.8);
+    font-size: 20px;
+    text-align: center;
+  }

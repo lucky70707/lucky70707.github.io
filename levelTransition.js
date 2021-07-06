@@ -55,7 +55,7 @@ function winLevel() {
 
 
 function breakDown() {
-
+  mazeGenerated=false;
   setupDone = false;
   currentPlayer = null;
   stack.length = 0;

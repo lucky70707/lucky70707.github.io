@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Amazing maze</title>
 
-    <script src="libraries/p5.js" type="text/javascript"></script>
+<head>
+  <meta charset="UTF-8">
+  <title>Amazing maze</title>
 
+  <script src="libraries/p5.js" type="text/javascript"></script>
   <script src="libraries/p5.dom.js" type="text/javascript"></script>
   <script src="libraries/p5.sound.js" type="text/javascript"></script>
 
-   <script type="text/javascript" src="sketch.js"></script>
-   <script type="text/javascript" src="cell.js"></script>
+  <script type="text/javascript" src="sketch.js"></script>
+  <script type="text/javascript" src="cell.js"></script>
   <script type="text/javascript" src="controls.js"></script>
   <script type="text/javascript" src="colors.js"></script>
   <script type="text/javascript" src="player.js"></script>
@@ -20,31 +20,39 @@
   <script type="text/javascript" src="primGeneration.js"></script>
   <script type="text/javascript" src="depthFirstGeneration.js"></script>
   <script type="text/javascript" src="util.js"></script>
-<script type="text/javascript" src="levelTransition.js"></script>
+  <script type="text/javascript" src="levelTransition.js"></script>
 
-<script type="text/javascript" src="fireworks/fireworks.js"></script>
-<script type="text/javascript" src="fireworks/particle.js"></script>
-<script type="text/javascript" src="fireworks/firework.js"></script>
+  <script type="text/javascript" src="fireworks/fireworks.js"></script>
+  <script type="text/javascript" src="fireworks/particle.js"></script>
+  <script type="text/javascript" src="fireworks/firework.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 
 
+</head>
 
-    <style>
-      body {
-        padding: 0; margin: 0;
-        background-color: white;
-      }
-      canvas {
-        vertical-align: top;
-      }
-      html {
-        font-family: monospace;
-        color: #333;
-        font-size: 20px;
-      }
-    </style>
-  </head>
-  <body>
-  </body>
+<body>
+
+
+  <div class="grid-container">
+
+    <div id="canvasDiv" class="grid-item"> </div>
+    <article id="articleInstruction" class="grid-item">
+        <p><b>Instructions:</b> drag cursor in the direction you want to go or use WASD or arrow keys</p>
+
+        
+
+        <p id="scoreParagraph">Score: 0</p>
+    </article>
+
+
+    <header class="grid-item"></header>
+    <footer class="grid-item"></footer>
+    <article id="righsidebar" class="grid-item"></article>
+    <article id="leftsidebar"  class="grid-item"></article>
+
+  </div>
+</body>
 
 
 </html>

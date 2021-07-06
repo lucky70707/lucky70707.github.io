@@ -21,7 +21,7 @@ let leftInt = 3;
 //level creation decision variables;
 let winText;
 let wincount = 0;
-let difficulty = 1;
+let difficulty = 0;
 let isWinning = false;
 
 //required for kruskal generation
@@ -40,7 +40,8 @@ let setupDone = false;
 function setup() {
   cnv = createCanvas(width, height);
   isWinning = false;
-  cnv.position(floor((windowWidth / 2) - width / 2), floor(windowHeight / 10))
+  //cnv.position(floor((windowWidth / 2) - width / 2), floor(windowHeight / 10))
+  cnv.parent(canvasDiv);
   cols = floor(width / w);
   rows = floor(height / w)
 
