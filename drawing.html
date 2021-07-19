@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>drawing</title>
+  </head>
+  <body>
+<svg viewBox="0 0 800 800">
+  //body
+<circle cx="400" cy="400" r="200" stroke="black" stroke-width="3" fill="yellow"/>
+//eyes
+<circle cx="325" cy="350" r="50" stroke="black" stroke-width="3" fill="white"/>
+<circle cx="475" cy="350" r="50" stroke="black" stroke-width="3" fill="white"/>
+<circle cx="325" cy="350" r="20" stroke="black" stroke-width="3" fill="red"/>
+<circle cx="475" cy="350" r="20" stroke="black" stroke-width="3" fill="blue"/>
+
+//mouth ends
+<circle cx="300" cy="450" r="10" stroke="black" stroke-width="3" fill="white"/>
+<circle cx="500" cy="450" r="10" stroke="black" stroke-width="3" fill="white"/>
+
+//lower lip
+<circle cx="400" cy="520" r="10" stroke="black" stroke-width="3" fill="white"/>
+
+//path lower lip
+<path d="M300 450
+        C300 450, 400 600, 500 450
+        l-10 0
+        C500 450 400 500 310 450
+        l-10 0
+        "  style="fill:white" stroke="black" stroke-width="3" />
+<path d="M 500 450
+        C500 450,400 600,300 450
+        l10 0
+        C310 450, 400 500, 490 450
+        l10 0
+        "
+        stroke="black" stroke-width="3" style="fill:white" />
+<path d="M400 0 L400 800"stroke="red" stroke-width="3" />
+
+<polygon points="0,0 0,100 100,100" style="fill:grey;stroke:black;stroke-width:1" />
+<polygon points="0,100 0,200 100,100" style="fill:grey;stroke:black;stroke-width:1" />
+
+<polygon points="100,100 150,0 200,100" style="fill:grey;stroke:black;stroke-width:1" />
+<polygon points="100,100 150,200 200,100" style="fill:grey;stroke:black;stroke-width:1" />
+
+
+<ellipse cx="250" cy="100" rx="50" ry="100"  style="fill:grey;stroke:black;stroke-width:1"/>
+<rect width="50" height="200" x="200" style="fill:grey;stroke:black;stroke-width:1"/>
+
+
+  </svg>
+  </body>
+</html>
