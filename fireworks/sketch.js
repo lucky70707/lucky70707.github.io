@@ -1,7 +1,7 @@
 
 
 function setup(){
-  createCanvas(800,800);
+  createCanvas(windowWidth,windowHeight);
   setupFireworks();
 }
 function draw(){

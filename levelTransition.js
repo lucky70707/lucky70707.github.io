@@ -9,6 +9,7 @@ function winLevel() {
   winText.style('color', color(colorText));
   winText.style('font-size', '500%');
   winText.style('text-align', 'center');
+  winText.style('justify-content', 'center');
   winText.style('display', 'block');
   winText.position(floor((windowWidth / 2) - width / 4), floor(windowHeight / 8));
 
