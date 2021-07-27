@@ -1,5 +1,25 @@
+/*
+Table of contents
+1. General Markup
+2. Typography
+*/
+ /*
+ NOTES:
+ text through text can be done by: 
+ background image, color,transparent and background clip: text
 
-  body {
+
+ */
+ 
+/*
+===============
+General Markup
+===============
+*/
+
+
+
+ body {
     padding: 0;
     margin: 0;
     background-color: white;
@@ -41,9 +61,7 @@ grid-area:articleInstruction;
 
 }
 
-#scoreParagraph{
-font-weight: bold;
-}
+
 footer{
   grid-area:footer;
 }
@@ -98,3 +116,6 @@ footer{
     
     
   }
+  #scoreParagraph{
+    font-weight: bold;
+    }
